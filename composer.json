@@ -64,7 +64,8 @@
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "4.1-dev"
+            "dev-master": "4.1-dev",
+            "dev-log-no-iterate": "4.1-dev"
         }
     }
 }
