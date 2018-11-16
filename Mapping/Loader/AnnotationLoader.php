@@ -68,7 +68,14 @@ class AnnotationLoader implements LoaderInterface
 
         foreach ($reflClass->getMethods() as $method) {
             if ($method->getDeclaringClass()->name === $className) {
-                foreach ($this->reader->getMethodAnnotations($method) as $constraint) {
+            	$constraints = $this->reader->getMethodAnnotations($method);
+
+            	if (!\is_array($constraints)) {
+            		/** @var $method \ReflectionMethod */
+            		\error_log(\sprintf('%s::%s did not load method annotations in validator', $className, $method->getName()));
+				}
+
+                foreach ($constraints as $constraint) {
                     if ($constraint instanceof Callback) {
                         $constraint->callback = $method->getName();
 
